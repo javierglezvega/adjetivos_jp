@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>OTROS · JP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-elevated: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --danger: #f97373;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 16px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      margin: auto;
+      background: linear-gradient(160deg, #020617 0, #020617 50%, #050816 100%);
+      border-radius: 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148, 163, 184, 0.12);
+      padding: 18px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(8px);
+      white-space: nowrap;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* Secciones de la pantalla inicial */
+
+    .section {
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 60%),
+                  var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 10px 10px 12px;
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .section-title span {
+      color: var(--accent);
+    }
+
+    .pill-button {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+        transform 0.05s ease;
+    }
+
+    .pill-button span {
+      font-size: 0.9em;
+    }
+
+    .pill-button.is-active {
+      background: rgba(56, 189, 248, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .pill-button:active {
+      transform: scale(0.97);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .toggle-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 1);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 8px 4px;
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.4; /* inactivo por defecto */
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+        opacity 0.15s ease, transform 0.05s ease;
+      user-select: none;
+    }
+
+    .toggle-btn.is-active {
+      opacity: 1;
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.95);
+      box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.09);
+    }
+
+    .toggle-btn:active {
+      transform: scale(0.97);
+    }
+
+    .section-footer {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .counter {
+      opacity: 0.9;
+    }
+
+    .hint {
+      opacity: 0.7;
+      text-align: right;
+    }
+
+    .modes {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 1);
+      background: linear-gradient(120deg, #0f172a, #020617);
+      color: var(--text);
+      font-size: 0.85rem;
+      padding: 9px 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+        opacity 0.15s ease, transform 0.05s ease;
+    }
+
+    .mode-btn span {
+      font-size: 0.9em;
+      opacity: 0.8;
+    }
+
+    .mode-btn.is-primary {
+      border-color: var(--accent);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.18), #020617 55%);
+    }
+
+    .mode-btn.is-disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .mode-btn:active:not(.is-disabled) {
+      transform: scale(0.97);
+    }
+
+    .status-bar {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .status-main {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+    }
+
+    .toast {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: left;
+      min-height: 1.2em;
+    }
+
+    /* Pantalla de estudio */
+
+    #study-screen {
+      display: none;
+    }
+
+    .study-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .home-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-muted);
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+    }
+
+    .home-btn:active {
+      transform: scale(0.95);
+    }
+
+    .progress-block {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-left: 10px;
+    }
+
+    .progress-bar-outer {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+      border: 1px solid rgba(30, 64, 175, 0.6);
+      overflow: hidden;
+    }
+
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #38bdf8, #22c55e);
+      transition: width 0.18s ease-out;
+    }
+
+    .progress-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .study-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 4px 16px;
+    }
+
+    .study-card {
+      width: 100%;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+      padding: 18px 12px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .study-main {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+
+    .study-sub {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
+
+    .audio-btn {
+      margin-top: 10px;
+      align-self: center;
+      font-size: 0.8rem;
+    }
+
+    .study-footer {
+      margin-top: auto;
+      padding-top: 6px;
+    }
+
+    .primary-bottom-btn {
+      width: 100%;
+      border-radius: 999px;
+      border: 1px solid var(--accent);
+      background: radial-gradient(circle at top, rgba(56, 189, 248, 0.32), #020617 60%);
+      color: var(--text);
+      padding: 11px 0;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.9);
+      transition: background 0.15s ease, transform 0.05s ease;
+    }
+
+    .primary-bottom-btn:active {
+      transform: scale(0.97);
+    }
+
+    .result-buttons {
+      display: none;
+      width: 100%;
+      gap: 8px;
+    }
+
+    .correct-btn,
+    .wrong-btn {
+      flex: 1;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 10px 0;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.45);
+      transition: transform 0.05s ease, opacity 0.15s ease;
+    }
+
+    .correct-btn {
+      background: rgba(34, 197, 94, 0.12);
+      border-color: rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+    }
+
+    .wrong-btn {
+      background: rgba(248, 113, 113, 0.12);
+      border-color: rgba(248, 113, 113, 0.7);
+      color: #fecaca;
+    }
+
+    .correct-btn:active,
+    .wrong-btn:active {
+      transform: scale(0.97);
+    }
+
+    .finished-text-main {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="title-block">
+        <h1>ADJETIVOS · JP</h1>
+        <p class="subtitle">Solo adjetivos</p>
+      </div>
+      <div class="badge">0.2</div>
+    </header>
+
+    <!-- Pantalla inicial -->
+    <main id="setup-screen">
+      <!-- Apartado 1: Verbos -->
+      <section class="section" id="section-verbs">
+        <div class="section-header">
+          <div class="section-title">
+            <span>1.</span> Tipo de adjetivo
+          </div>
+          <button
+            id="btn-select-all-verbs"
+            class="pill-button"
+            type="button"
+          >
+            <span>Seleccionar todos</span>
+          </button>
+        </div>
+        <div class="grid" id="verbs-grid"></div>
+        <div class="section-footer" style="display: none;">
+          <div class="counter">
+            Seleccionados: <span id="verbs-count">0</span>
+          </div>
+          <div class="hint">
+            Toca para activar/desactivar. <br />“Seleccionar todos” alterna todo el grupo.
+          </div>
+        </div>
+      </section>
+
+      <!-- Apartado 2: Formas verbales -->
+      <section class="section" id="section-forms">
+        <div class="section-header">
+          <div class="section-title">
+            <span>2.</span> Formas
+          </div>
+          <button
+            id="btn-select-all-forms"
+            class="pill-button"
+            type="button"
+          >
+            <span>Seleccionar todas</span>
+          </button>
+        </div>
+        <div class="grid" id="forms-grid"></div>
+        <div class="section-footer" style="display: none;">
+          <div class="counter">
+            Seleccionadas: <span id="forms-count">0</span>
+          </div>
+          <div class="hint">
+            Combina tipo de adjetivo + formas para definir tu lista de estudio.
+          </div>
+        </div>
+      </section>
+
+      <!-- Apartado 3: Modo de estudio -->
+      <section class="section" id="section-modes">
+        <div class="section-header">
+          <div class="section-title">
+            <span>3.</span> Modo de estudio
+          </div>
+        </div>
+        <div class="modes">
+          <button
+            class="mode-btn is-disabled"
+            id="mode-traducir"
+            type="button"
+            disabled
+          >
+            TRADUCIR
+          </button>
+          <button
+            class="mode-btn is-disabled"
+            id="mode-escuchar"
+            type="button"
+            disabled
+          >
+            ESCUCHAR
+          </button>
+          <button
+            class="mode-btn is-disabled"
+            id="mode-leer"
+            type="button"
+            disabled
+          >
+            LEER
+          </button>
+        </div>
+        <div class="status-bar" id="status-bar">
+          <div class="status-main">
+            <span class="status-dot"></span>
+            <span id="status-text">Selecciona al menos 1 tipo de adjetivo y 1 forma.</span>
+          </div>
+          <div>
+            <span id="status-counter"></span>
+          </div>
+        </div>
+        <div class="toast" id="toast"></div>
+      </section>
+    </main>
+
+    <!-- Pantalla de estudio -->
+    <main id="study-screen">
+      <div class="study-header">
+        <button id="btn-home" class="home-btn" type="button" title="Volver al inicio">
+          🏠
+        </button>
+        <div class="progress-block">
+          <div class="progress-bar-outer">
+            <div id="progress-bar" class="progress-bar-inner"></div>
+          </div>
+          <div id="progress-text" class="progress-text">0 / 0</div>
+        </div>
+      </div>
+
+      <div class="study-body">
+        <div class="study-card">
+          <div id="study-main" class="study-main"></div>
+          <div id="study-sub" class="study-sub"></div>
+          <button
+            id="btn-repeat-audio"
+            class="pill-button audio-btn"
+            type="button"
+            style="display: none;"
+          >
+            Repetir audio
+          </button>
+        </div>
+      </div>
+
+      <div class="study-footer">
+        <button
+          id="btn-reveal"
+          class="primary-bottom-btn"
+          type="button"
+        >
+          Revelar
+        </button>
+
+        <div id="result-buttons" class="result-buttons">
+          <button id="btn-correct" class="correct-btn" type="button">
+            ✓ He acertado
+          </button>
+          <button id="btn-wrong" class="wrong-btn" type="button">
+            ✕ No la sabía
+          </button>
+        </div>
+
+        <button
+          id="btn-finish-home"
+          class="primary-bottom-btn"
+          type="button"
+          style="display: none;"
+        >
+          Volver al inicio
+        </button>
+      </div>
+
+      <audio id="audio-player"></audio>
+    </main>
+  </div>
+
+  <script>
+
+    const frases = [
+{jp:"暑いです。", es:"Hace calor.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/001.mp3"},
+{jp:"暑かったです。", es:"Hacía calor.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/002.mp3"},
+{jp:"暑くないです。", es:"No hace calor.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/003.mp3"},
+{jp:"暑くなかったです。", es:"No hacía calor.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/004.mp3"},
+{jp:"暑い。", es:"Hace calor. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/005.mp3"},
+{jp:"暑かった。", es:"Hacía calor. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/006.mp3"},
+{jp:"暑くない。", es:"No hace calor. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/007.mp3"},
+{jp:"暑くなかった。", es:"No hacía calor. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/008.mp3"},
+{jp:"新しいです。", es:"Es nuevo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/009.mp3"},
+{jp:"新しかったです。", es:"Era nuevo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/010.mp3"},
+{jp:"新しくないです。", es:"No es nuevo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/011.mp3"},
+{jp:"新しくなかったです。", es:"No era nuevo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/012.mp3"},
+{jp:"新しい。", es:"Es nuevo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/013.mp3"},
+{jp:"新しかった。", es:"Era nuevo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/014.mp3"},
+{jp:"新しくない。", es:"No es nuevo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/015.mp3"},
+{jp:"新しくなかった。", es:"No era nuevo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/016.mp3"},
+{jp:"赤いです。", es:"Es rojo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/017.mp3"},
+{jp:"赤かったです。", es:"Era rojo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/018.mp3"},
+{jp:"赤くないです。", es:"No es rojo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/019.mp3"},
+{jp:"赤くなかったです。", es:"No era rojo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/020.mp3"},
+{jp:"赤い。", es:"Es rojo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/021.mp3"},
+{jp:"赤かった。", es:"Era rojo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/022.mp3"},
+{jp:"赤くない。", es:"No es rojo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/023.mp3"},
+{jp:"赤くなかった。", es:"No era rojo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/024.mp3"},
+{jp:"青いです。", es:"Es azul.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/025.mp3"},
+{jp:"青かったです。", es:"Era azul.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/026.mp3"},
+{jp:"青くないです。", es:"No es azul.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/027.mp3"},
+{jp:"青くなかったです。", es:"No era azul.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/028.mp3"},
+{jp:"青い。", es:"Es azul. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/029.mp3"},
+{jp:"青かった。", es:"Era azul. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/030.mp3"},
+{jp:"青くない。", es:"No es azul. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/031.mp3"},
+{jp:"青くなかった。", es:"No era azul. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/032.mp3"},
+{jp:"明るいです。", es:"Es brillante/alegre.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/033.mp3"},
+{jp:"明るかったです。", es:"Era brillante/alegre.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/034.mp3"},
+{jp:"明るくないです。", es:"No es brillante/alegre.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/035.mp3"},
+{jp:"明るくなかったです。", es:"No era brillante/alegre.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/036.mp3"},
+{jp:"明るい。", es:"Es brillante/alegre. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/037.mp3"},
+{jp:"明るかった。", es:"Era brillante/alegre. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/038.mp3"},
+{jp:"明るくない。", es:"No es brillante/alegre. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/039.mp3"},
+{jp:"明るくなかった。", es:"No era brillante/alegre. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/040.mp3"},
+{jp:"危ないです。", es:"Es peligroso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/041.mp3"},
+{jp:"危なかったです。", es:"Era peligroso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/042.mp3"},
+{jp:"危なくないです。", es:"No es peligroso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/043.mp3"},
+{jp:"危なくなかったです。", es:"No era peligroso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/044.mp3"},
+{jp:"危ない。", es:"Es peligroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/045.mp3"},
+{jp:"危なかった。", es:"Era peligroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/046.mp3"},
+{jp:"危なくない。", es:"No es peligroso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/047.mp3"},
+{jp:"危なくなかった。", es:"No era peligroso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/048.mp3"},
+{jp:"うるさいです。", es:"Es ruidoso/molesto.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/049.mp3"},
+{jp:"うるさかったです。", es:"Era ruidoso/molesto.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/050.mp3"},
+{jp:"うるさくないです。", es:"No es ruidoso/molesto.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/051.mp3"},
+{jp:"うるさくなかったです。", es:"No era ruidoso/molesto.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/052.mp3"},
+{jp:"うるさい。", es:"Es ruidoso/molesto. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/053.mp3"},
+{jp:"うるさかった。", es:"Era ruidoso/molesto. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/054.mp3"},
+{jp:"うるさくない。", es:"No es ruidoso/molesto. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/055.mp3"},
+{jp:"うるさくなかった。", es:"No era ruidoso/molesto. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/056.mp3"},
+{jp:"大きいです。", es:"Es grande.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/057.mp3"},
+{jp:"大きかったです。", es:"Era grande.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/058.mp3"},
+{jp:"大きくないです。", es:"No es grande.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/059.mp3"},
+{jp:"大きくなかったです。", es:"No era grande.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/060.mp3"},
+{jp:"大きい。", es:"Es grande. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/061.mp3"},
+{jp:"大きかった。", es:"Era grande. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/062.mp3"},
+{jp:"大きくない。", es:"No es grande. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/063.mp3"},
+{jp:"大きくなかった。", es:"No era grande. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/064.mp3"},
+{jp:"面白いです。", es:"Es interesante.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/065.mp3"},
+{jp:"面白かったです。", es:"Era interesante.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/066.mp3"},
+{jp:"面白くないです。", es:"No es interesante.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/067.mp3"},
+{jp:"面白くなかったです。", es:"No era interesante.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/068.mp3"},
+{jp:"面白い。", es:"Es interesante. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/069.mp3"},
+{jp:"面白かった。", es:"Era interesante. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/070.mp3"},
+{jp:"面白くない。", es:"No es interesante. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/071.mp3"},
+{jp:"面白くなかった。", es:"No era interesante. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/072.mp3"},
+{jp:"暗いです。", es:"Está oscuro.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/073.mp3"},
+{jp:"暗かったです。", es:"Estaba oscuro.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/074.mp3"},
+{jp:"暗くないです。", es:"No está oscuro.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/075.mp3"},
+{jp:"暗くなかったです。", es:"No estaba oscuro.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/076.mp3"},
+{jp:"暗い。", es:"Está oscuro. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/077.mp3"},
+{jp:"暗かった。", es:"Estaba oscuro. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/078.mp3"},
+{jp:"暗くない。", es:"No está oscuro. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/079.mp3"},
+{jp:"暗くなかった。", es:"No estaba oscuro. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/080.mp3"},
+{jp:"寒いです。", es:"Hace frío.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/081.mp3"},
+{jp:"寒かったです。", es:"Hacía frío.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/082.mp3"},
+{jp:"寒くないです。", es:"No hace frío.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/083.mp3"},
+{jp:"寒くなかったです。", es:"No hacía frío.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/084.mp3"},
+{jp:"寒い。", es:"Hace frío. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/085.mp3"},
+{jp:"寒かった。", es:"Hacía frío. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/086.mp3"},
+{jp:"寒くない。", es:"No hace frío. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/087.mp3"},
+{jp:"寒くなかった。", es:"No hacía frío. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/088.mp3"},
+{jp:"涼しいです。", es:"Es/hace fresco.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/089.mp3"},
+{jp:"涼しかったです。", es:"Era/hacía fresco.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/090.mp3"},
+{jp:"涼しくないです。", es:"No es/hace fresco.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/091.mp3"},
+{jp:"涼しくなかったです。", es:"No era/hacía fresco.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/092.mp3"},
+{jp:"涼しい。", es:"Es/hace fresco. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/093.mp3"},
+{jp:"涼しかった。", es:"Era/hacía fresco. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/094.mp3"},
+{jp:"涼しくない。", es:"No es/hace fresco. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/095.mp3"},
+{jp:"涼しくなかった。", es:"No era/hacía fresco. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/096.mp3"},
+{jp:"すごいです。", es:"Es genial.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/097.mp3"},
+{jp:"すごかったです。", es:"Era genial.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/098.mp3"},
+{jp:"すごくないです。", es:"No es genial.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/099.mp3"},
+{jp:"すごくなかったです。", es:"No era genial.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/100.mp3"},
+{jp:"すごい。", es:"Es genial. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/101.mp3"},
+{jp:"すごかった。", es:"Era genial. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/102.mp3"},
+{jp:"すごくない。", es:"No es genial. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/103.mp3"},
+{jp:"すごくなかった。", es:"No era genial. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/104.mp3"},
+{jp:"狭いです。", es:"Es estrecho.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/105.mp3"},
+{jp:"狭かったです。", es:"Era estrecho.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/106.mp3"},
+{jp:"狭くないです。", es:"No es estrecho.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/107.mp3"},
+{jp:"狭くなかったです。", es:"No era estrecho.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/108.mp3"},
+{jp:"狭い。", es:"Es estrecho. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/109.mp3"},
+{jp:"狭かった。", es:"Era estrecho. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/110.mp3"},
+{jp:"狭くない。", es:"No es estrecho. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/111.mp3"},
+{jp:"狭くなかった。", es:"No era estrecho. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/112.mp3"},
+{jp:"高いです。", es:"Es alto/caro.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/113.mp3"},
+{jp:"高かったです。", es:"Era alto/caro.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/114.mp3"},
+{jp:"高くないです。", es:"No es alto/caro.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/115.mp3"},
+{jp:"高くなかったです。", es:"No era alto/caro.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/116.mp3"},
+{jp:"高い。", es:"Es alto/caro. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/117.mp3"},
+{jp:"高かった。", es:"Era alto/caro. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/118.mp3"},
+{jp:"高くない。", es:"No es alto/caro. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/119.mp3"},
+{jp:"高くなかった。", es:"No era alto/caro. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/120.mp3"},
+{jp:"冷たいです。", es:"Está frío.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/121.mp3"},
+{jp:"冷たかったです。", es:"Estaba frío.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/122.mp3"},
+{jp:"冷たくないです。", es:"No está frío.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/123.mp3"},
+{jp:"冷たくなかったです。", es:"No estaba frío.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/124.mp3"},
+{jp:"冷たい。", es:"Está frío. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/125.mp3"},
+{jp:"冷たかった。", es:"Estaba frío. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/126.mp3"},
+{jp:"冷たくない。", es:"No está frío. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/127.mp3"},
+{jp:"冷たくなかった。", es:"No estaba frío. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/128.mp3"},
+{jp:"強いです。", es:"Es fuerte/potente.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/129.mp3"},
+{jp:"強かったです。", es:"Era fuerte/potente.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/130.mp3"},
+{jp:"強くないです。", es:"No es fuerte/potente.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/131.mp3"},
+{jp:"強くなかったです。", es:"No era fuerte/potente.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/132.mp3"},
+{jp:"強い。", es:"Es fuerte/potente. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/133.mp3"},
+{jp:"強かった。", es:"Era fuerte/potente. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/134.mp3"},
+{jp:"強くない。", es:"No es fuerte/potente. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/135.mp3"},
+{jp:"強くなかった。", es:"No era fuerte/potente. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/136.mp3"},
+{jp:"遠いです。", es:"Está lejos.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/137.mp3"},
+{jp:"遠かったです。", es:"Estaba lejos.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/138.mp3"},
+{jp:"遠くないです。", es:"No está lejos.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/139.mp3"},
+{jp:"遠くなかったです。", es:"No estaba lejos.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/140.mp3"},
+{jp:"遠い。", es:"Está lejos. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/141.mp3"},
+{jp:"遠かった。", es:"Estaba lejos. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/142.mp3"},
+{jp:"遠くない。", es:"No está lejos. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/143.mp3"},
+{jp:"遠くなかった。", es:"No estaba lejos. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/144.mp3"},
+{jp:"小さいです。", es:"Es pequeño.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/145.mp3"},
+{jp:"小さかったです。", es:"Era pequeño.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/146.mp3"},
+{jp:"小さくないです。", es:"No es pequeño.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/147.mp3"},
+{jp:"小さくなかったです。", es:"No era pequeño.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/148.mp3"},
+{jp:"小さい。", es:"Es pequeño. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/149.mp3"},
+{jp:"小さかった。", es:"Era pequeño. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/150.mp3"},
+{jp:"小さくない。", es:"No es pequeño. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/151.mp3"},
+{jp:"小さくなかった。", es:"No era pequeño. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/152.mp3"},
+{jp:"つまらないです。", es:"Es aburrido.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/153.mp3"},
+{jp:"つまらなかったです。", es:"Era aburrido.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/154.mp3"},
+{jp:"つまらなくないです。", es:"No es aburrido.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/155.mp3"},
+{jp:"つまらなくなかったです。", es:"No era aburrido.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/156.mp3"},
+{jp:"つまらない。", es:"Es aburrido. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/157.mp3"},
+{jp:"つまらなかった。", es:"Era aburrido. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/158.mp3"},
+{jp:"つまらなくない。", es:"No es aburrido. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/159.mp3"},
+{jp:"つまらなくなかった。", es:"No era aburrido. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/160.mp3"},
+{jp:"早いです。", es:"Es temprano.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/161.mp3"},
+{jp:"早かったです。", es:"Era temprano.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/162.mp3"},
+{jp:"早くないです。", es:"No es temprano.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/163.mp3"},
+{jp:"早くなかったです。", es:"No era temprano.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/164.mp3"},
+{jp:"早い。", es:"Es temprano. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/165.mp3"},
+{jp:"早かった。", es:"Era temprano. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/166.mp3"},
+{jp:"早くない。", es:"No es temprano. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/167.mp3"},
+{jp:"早くなかった。", es:"No era temprano. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/168.mp3"},
+{jp:"速いです。", es:"Es rápido.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/169.mp3"},
+{jp:"速かったです。", es:"Era rápido.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/170.mp3"},
+{jp:"速くないです。", es:"No es rápido.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/171.mp3"},
+{jp:"速くなかったです。", es:"No era rápido.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/172.mp3"},
+{jp:"速い。", es:"Es rápido. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/173.mp3"},
+{jp:"速かった。", es:"Era rápido. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/174.mp3"},
+{jp:"速くない。", es:"No es rápido. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/175.mp3"},
+{jp:"速くなかった。", es:"No era rápido. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/176.mp3"},
+{jp:"低いです。", es:"Es bajo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/177.mp3"},
+{jp:"低かったです。", es:"Era bajo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/178.mp3"},
+{jp:"低くないです。", es:"No es bajo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/179.mp3"},
+{jp:"低くなかったです。", es:"No era bajo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/180.mp3"},
+{jp:"低い。", es:"Es bajo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/181.mp3"},
+{jp:"低かった。", es:"Era bajo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/182.mp3"},
+{jp:"低くない。", es:"No es bajo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/183.mp3"},
+{jp:"低くなかった。", es:"No era bajo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/184.mp3"},
+{jp:"広いです。", es:"Es amplio/ancho.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/185.mp3"},
+{jp:"広かったです。", es:"Era amplio/ancho.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/186.mp3"},
+{jp:"広くないです。", es:"No es amplio/ancho.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/187.mp3"},
+{jp:"広くなかったです。", es:"No era amplio/ancho.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/188.mp3"},
+{jp:"広い。", es:"Es amplio/ancho. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/189.mp3"},
+{jp:"広かった。", es:"Era amplio/ancho. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/190.mp3"},
+{jp:"広くない。", es:"No es amplio/ancho. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/191.mp3"},
+{jp:"広くなかった。", es:"No era amplio/ancho. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/192.mp3"},
+{jp:"まずいです。", es:"Está malo de sabor.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/193.mp3"},
+{jp:"まずかったです。", es:"Estaba malo de sabor.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/194.mp3"},
+{jp:"まずくないです。", es:"No está malo de sabor.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/195.mp3"},
+{jp:"まずくなかったです。", es:"No estaba malo de sabor.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/196.mp3"},
+{jp:"まずい。", es:"Está malo de sabor. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/197.mp3"},
+{jp:"まずかった。", es:"Estaba malo de sabor. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/198.mp3"},
+{jp:"まずくない。", es:"No está malo de sabor. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/199.mp3"},
+{jp:"まずくなかった。", es:"No estaba malo de sabor. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/200.mp3"},
+{jp:"易しいです。", es:"Es fácil.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/201.mp3"},
+{jp:"易しかったです。", es:"Era fácil.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/202.mp3"},
+{jp:"易しくないです。", es:"No es fácil.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/203.mp3"},
+{jp:"易しくなかったです。", es:"No era fácil.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/204.mp3"},
+{jp:"易しい。", es:"Es fácil. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/205.mp3"},
+{jp:"易しかった。", es:"Era fácil. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/206.mp3"},
+{jp:"易しくない。", es:"No es fácil. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/207.mp3"},
+{jp:"易しくなかった。", es:"No era fácil. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/208.mp3"},
+{jp:"優しいです。", es:"Es amable.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/209.mp3"},
+{jp:"優しかったです。", es:"Era amable.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/210.mp3"},
+{jp:"優しくないです。", es:"No es amable.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/211.mp3"},
+{jp:"優しくなかったです。", es:"No era amable.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/212.mp3"},
+{jp:"優しい。", es:"Es amable. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/213.mp3"},
+{jp:"優しかった。", es:"Era amable. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/214.mp3"},
+{jp:"優しくない。", es:"No es amable. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/215.mp3"},
+{jp:"優しくなかった。", es:"No era amable. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/216.mp3"},
+{jp:"安いです。", es:"Es barato.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/217.mp3"},
+{jp:"安かったです。", es:"Era barato.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/218.mp3"},
+{jp:"安くないです。", es:"No es barato.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/219.mp3"},
+{jp:"安くなかったです。", es:"No era barato.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/220.mp3"},
+{jp:"安い。", es:"Es barato. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/221.mp3"},
+{jp:"安かった。", es:"Era barato. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/222.mp3"},
+{jp:"安くない。", es:"No es barato. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/223.mp3"},
+{jp:"安くなかった。", es:"No era barato. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/224.mp3"},
+{jp:"悪いです。", es:"Es de mala calidad.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/225.mp3"},
+{jp:"悪かったです。", es:"Era de mala calidad.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/226.mp3"},
+{jp:"悪くないです。", es:"No es de mala calidad.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/227.mp3"},
+{jp:"悪くなかったです。", es:"No era de mala calidad.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/228.mp3"},
+{jp:"悪い。", es:"Es de mala calidad. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/229.mp3"},
+{jp:"悪かった。", es:"Era de mala calidad. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/230.mp3"},
+{jp:"悪くない。", es:"No es de mala calidad. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/231.mp3"},
+{jp:"悪くなかった。", es:"No era de mala calidad. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/232.mp3"},
+{jp:"白いです。", es:"Es blanco.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/233.mp3"},
+{jp:"白かったです。", es:"Era blanco.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/234.mp3"},
+{jp:"白くないです。", es:"No es blanco.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/235.mp3"},
+{jp:"白くなかったです。", es:"No era blanco.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/236.mp3"},
+{jp:"白い。", es:"Es blanco. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/237.mp3"},
+{jp:"白かった。", es:"Era blanco. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/238.mp3"},
+{jp:"白くない。", es:"No es blanco. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/239.mp3"},
+{jp:"白くなかった。", es:"No era blanco. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/240.mp3"},
+{jp:"黒いです。", es:"Es negro.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/241.mp3"},
+{jp:"黒かったです。", es:"Era negro.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/242.mp3"},
+{jp:"黒くないです。", es:"No es negro.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/243.mp3"},
+{jp:"黒くなかったです。", es:"No era negro.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/244.mp3"},
+{jp:"黒い。", es:"Es negro. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/245.mp3"},
+{jp:"黒かった。", es:"Era negro. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/246.mp3"},
+{jp:"黒くない。", es:"No es negro. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/247.mp3"},
+{jp:"黒くなかった。", es:"No era negro. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/248.mp3"},
+		/*
+{jp:"黄⾊いです。", es:"Es amarillo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/249.mp3"},
+{jp:"黄⾊かったです。", es:"Era amarillo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/250.mp3"},
+{jp:"黄⾊くないです。", es:"No es amarillo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/251.mp3"},
+{jp:"黄⾊くなかったです。", es:"No era amarillo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/252.mp3"},
+{jp:"黄⾊い。", es:"Es amarillo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/253.mp3"},
+{jp:"黄⾊かった。", es:"Era amarillo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/254.mp3"},
+{jp:"黄⾊くない。", es:"No es amarillo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/255.mp3"},
+{jp:"黄⾊くなかった。", es:"No era amarillo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/256.mp3"},
+		*/
+{jp:"茶色いです。", es:"Es marrón.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/257.mp3"},
+{jp:"茶色かったです。", es:"Era marrón.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/258.mp3"},
+{jp:"茶色くないです。", es:"No es marrón.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/259.mp3"},
+{jp:"茶色くなかったです。", es:"No era marrón.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/260.mp3"},
+{jp:"茶色い。", es:"Es marrón. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/261.mp3"},
+{jp:"茶色かった。", es:"Era marrón. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/262.mp3"},
+{jp:"茶色くない。", es:"No es marrón. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/263.mp3"},
+{jp:"茶色くなかった。", es:"No era marrón. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/264.mp3"},
+{jp:"忙しいです。", es:"Estoy ocupado.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/265.mp3"},
+{jp:"忙しかったです。", es:"Estaba ocupado.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/266.mp3"},
+{jp:"忙しくないです。", es:"No estoy ocupado.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/267.mp3"},
+{jp:"忙しくなかったです。", es:"No estaba ocupado.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/268.mp3"},
+{jp:"忙しい。", es:"Estoy ocupado. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/269.mp3"},
+{jp:"忙しかった。", es:"Estaba ocupado. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/270.mp3"},
+{jp:"忙しくない。", es:"No estoy ocupado. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/271.mp3"},
+{jp:"忙しくなかった。", es:"No estaba ocupado. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/272.mp3"},
+{jp:"静かです。", es:"Es silencioso.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/273.mp3"},
+{jp:"静かでした。", es:"Era silencioso.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/274.mp3"},
+{jp:"静かじゃありません。", es:"No es silencioso.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/275.mp3"},
+{jp:"静かじゃありませんでした。", es:"No era silencioso.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/276.mp3"},
+{jp:"静かだ。", es:"Es silencioso. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/277.mp3"},
+{jp:"静かだった。", es:"Era silencioso. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/278.mp3"},
+{jp:"静かじゃない。", es:"No es silencioso. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/279.mp3"},
+{jp:"静かじゃなかった。", es:"No era silencioso. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/280.mp3"},
+{jp:"きれいです。", es:"Es bonito/limpio.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/281.mp3"},
+{jp:"きれいでした。", es:"Era bonito/limpio.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/282.mp3"},
+{jp:"きれいじゃありません。", es:"No es bonito/limpio.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/283.mp3"},
+{jp:"きれいじゃありませんでした。", es:"No era bonito/limpio.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/284.mp3"},
+{jp:"きれいだ。", es:"Es bonito/limpio. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/285.mp3"},
+{jp:"きれいだった。", es:"Era bonito/limpio. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/286.mp3"},
+{jp:"きれいじゃない。", es:"No es bonito/limpio. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/287.mp3"},
+{jp:"きれいじゃなかった。", es:"No era bonito/limpio. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/288.mp3"},
+{jp:"有名です。", es:"Es famoso.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/289.mp3"},
+{jp:"有名でした。", es:"Era famoso.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/290.mp3"},
+{jp:"有名じゃありません。", es:"No es famoso.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/291.mp3"},
+{jp:"有名じゃありませんでした。", es:"No era famoso.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/292.mp3"},
+{jp:"有名だ。", es:"Es famoso. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/293.mp3"},
+{jp:"有名だった。", es:"Era famoso. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/294.mp3"},
+{jp:"有名じゃない。", es:"No es famoso. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/295.mp3"},
+{jp:"有名じゃなかった。", es:"No era famoso. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/296.mp3"},
+{jp:"便利です。", es:"Es útil.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/297.mp3"},
+{jp:"便利でした。", es:"Era útil.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/298.mp3"},
+{jp:"便利じゃありません。", es:"No es útil.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/299.mp3"},
+{jp:"便利じゃありませんでした。", es:"No era útil.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/300.mp3"},
+{jp:"便利だ。", es:"Es útil. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/301.mp3"},
+{jp:"便利だった。", es:"Era útil. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/302.mp3"},
+{jp:"便利じゃない。", es:"No es útil. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/303.mp3"},
+{jp:"便利じゃなかった。", es:"No era útil. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/304.mp3"},
+{jp:"元気です。", es:"Está sano.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/305.mp3"},
+{jp:"元気でした。", es:"Estaba sano.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/306.mp3"},
+{jp:"元気じゃありません。", es:"No está sano.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/307.mp3"},
+{jp:"元気じゃありませんでした。", es:"No estaba sano.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/308.mp3"},
+{jp:"元気だ。", es:"Está sano. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/309.mp3"},
+{jp:"元気だった。", es:"Estaba sano. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/310.mp3"},
+{jp:"元気じゃない。", es:"No está sano. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/311.mp3"},
+{jp:"元気じゃなかった。", es:"No estaba sano. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/312.mp3"},
+{jp:"上手です。", es:"Es habilidoso.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/313.mp3"},
+{jp:"上手でした。", es:"Era habilidoso.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/314.mp3"},
+{jp:"上手じゃありません。", es:"No es habilidoso.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/315.mp3"},
+{jp:"上手じゃありませんでした。", es:"No era habilidoso.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/316.mp3"},
+{jp:"上手だ。", es:"Es habilidoso. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/317.mp3"},
+{jp:"上手だった。", es:"Era habilidoso. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/318.mp3"},
+{jp:"上手じゃない。", es:"No es habilidoso. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/319.mp3"},
+{jp:"上手じゃなかった。", es:"No era habilidoso. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/320.mp3"},
+{jp:"下手です。", es:"Es torpe.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/321.mp3"},
+{jp:"下手でした。", es:"Era torpe.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/322.mp3"},
+{jp:"下手じゃありません。", es:"No es torpe.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/323.mp3"},
+{jp:"下手じゃありませんでした。", es:"No era torpe.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/324.mp3"},
+{jp:"下手だ。", es:"Es torpe. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/325.mp3"},
+{jp:"下手だった。", es:"Era torpe. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/326.mp3"},
+{jp:"下手じゃない。", es:"No es torpe. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/327.mp3"},
+{jp:"下手じゃなかった。", es:"No era torpe. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/328.mp3"},
+{jp:"好きです。", es:"Me gusta.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/329.mp3"},
+{jp:"好きでした。", es:"Me gustaba.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/330.mp3"},
+{jp:"好きじゃありません。", es:"No me gusta.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/331.mp3"},
+{jp:"好きじゃありませんでした。", es:"No me gustaba.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/332.mp3"},
+{jp:"好きだ。", es:"Me gusta. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/333.mp3"},
+{jp:"好きだった。", es:"Me gustaba. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/334.mp3"},
+{jp:"好きじゃない。", es:"No me gusta. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/335.mp3"},
+{jp:"好きじゃなかった。", es:"No me gustaba. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/336.mp3"},
+{jp:"嫌いです。", es:"Lo odio.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/337.mp3"},
+{jp:"嫌いでした。", es:"Lo odiaba.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/338.mp3"},
+{jp:"嫌いじゃありません。", es:"No lo odio.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/339.mp3"},
+{jp:"嫌いじゃありませんでした。", es:"No lo odiaba.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/340.mp3"},
+{jp:"嫌いだ。", es:"Lo odio. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/341.mp3"},
+{jp:"嫌いだった。", es:"Lo odiaba. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/342.mp3"},
+{jp:"嫌いじゃない。", es:"No lo odio. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/343.mp3"},
+{jp:"嫌いじゃなかった。", es:"No lo odiaba. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/344.mp3"},
+{jp:"大切です。", es:"Es importante.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/345.mp3"},
+{jp:"大切でした。", es:"Era importante.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/346.mp3"},
+{jp:"大切じゃありません。", es:"No es importante.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/347.mp3"},
+{jp:"大切じゃありませんでした。", es:"No era importante.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/348.mp3"},
+{jp:"大切だ。", es:"Es importante. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/349.mp3"},
+{jp:"大切だった。", es:"Era importante. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/350.mp3"},
+{jp:"大切じゃない。", es:"No es importante. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/351.mp3"},
+{jp:"大切じゃなかった。", es:"No era importante. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/352.mp3"},
+{jp:"たいへんです。", es:"Es duro.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/353.mp3"},
+{jp:"たいへんでした。", es:"Era duro.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/354.mp3"},
+{jp:"たいへんじゃありません。", es:"No es duro.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/355.mp3"},
+{jp:"たいへんじゃありませんでした。", es:"No era duro.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/356.mp3"},
+{jp:"たいへんだ。", es:"Es duro. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/357.mp3"},
+{jp:"たいへんだった。", es:"Era duro. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/358.mp3"},
+{jp:"たいへんじゃない。", es:"No es duro. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/359.mp3"},
+{jp:"たいへんじゃなかった。", es:"No era duro. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/360.mp3"},
+		/*
+{jp:"安全です。", es:"Es seguro.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/361.mp3"},
+{jp:"安全でした。", es:"Era seguro.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/362.mp3"},
+{jp:"安全じゃありません。", es:"No es seguro.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/363.mp3"},
+{jp:"安全じゃありませんでした。", es:"No era seguro.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/364.mp3"},
+{jp:"安全だ。", es:"Es seguro. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/365.mp3"},
+{jp:"安全だった。", es:"Era seguro. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/366.mp3"},
+{jp:"安全じゃない。", es:"No es seguro. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/367.mp3"},
+{jp:"安全じゃなかった。", es:"No era seguro. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/368.mp3"},
+		*/
+{jp:"暇です。", es:"Estoy desocupado.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/369.mp3"},
+{jp:"暇でした。", es:"Estaba desocupado.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/370.mp3"},
+{jp:"暇じゃありません。", es:"No tengo tiempo libre.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/371.mp3"},
+{jp:"暇じゃありませんでした。", es:"No tenía tiempo libre.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/372.mp3"},
+{jp:"暇だ。", es:"Estoy desocupado. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/373.mp3"},
+{jp:"暇だった。", es:"Estaba desocupado. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/374.mp3"},
+{jp:"暇じゃない。", es:"No tengo tiempo libre. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/375.mp3"},
+{jp:"暇じゃなかった。", es:"No tenía tiempo libre. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/376.mp3"},
+		/*
+{jp:"真面目です。", es:"Es serio/formal.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/377.mp3"},
+{jp:"真面目でした。", es:"Era serio/formal.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/378.mp3"},
+{jp:"真面目じゃありません。", es:"No es serio/formal.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/379.mp3"},
+{jp:"真面目じゃありませんでした。", es:"No era serio/formal.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/380.mp3"},
+{jp:"真面目だ。", es:"Es serio/formal. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/381.mp3"},
+{jp:"真面目だった。", es:"Era serio/formal. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/382.mp3"},
+{jp:"真面目じゃない。", es:"No es serio/formal. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/383.mp3"},
+{jp:"真面目じゃなかった。", es:"No era serio/formal. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/384.mp3"},
+		*/
+{jp:"丈夫です。", es:"Es resistente/fuerte.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/385.mp3"},
+{jp:"丈夫でした。", es:"Era resistente/fuerte.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/386.mp3"},
+{jp:"丈夫じゃありません。", es:"No es resistente/fuerte.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/387.mp3"},
+{jp:"丈夫じゃありませんでした。", es:"No era resistente/fuerte.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/388.mp3"},
+{jp:"丈夫だ。", es:"Es resistente/fuerte. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/389.mp3"},
+{jp:"丈夫だった。", es:"Era resistente/fuerte. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/390.mp3"},
+{jp:"丈夫じゃない。", es:"No es resistente/fuerte. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/391.mp3"},
+{jp:"丈夫じゃなかった。", es:"No era resistente/fuerte. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/392.mp3"},
+{jp:"にぎやかです。", es:"Es animado/bullicioso.", verbo: "-な", forma: "f. larga (afirmativo presente)", audio: "audios/393.mp3"},
+{jp:"にぎやかでした。", es:"Era animado/bullicioso.", verbo: "-な", forma: "f. larga (afirmativo pasado)", audio: "audios/394.mp3"},
+{jp:"にぎやかじゃありません。", es:"No es animado/bullicioso.", verbo: "-な", forma: "f. larga (negativo presente)", audio: "audios/395.mp3"},
+{jp:"にぎやかじゃありませんでした。", es:"No era animado/bullicioso.", verbo: "-な", forma: "f. larga (negativo pasado)", audio: "audios/396.mp3"},
+{jp:"にぎやかだ。", es:"Es animado/bullicioso. (informal)", verbo: "-な", forma: "f. corta (afirmativo presente)", audio: "audios/397.mp3"},
+{jp:"にぎやかだった。", es:"Era animado/bullicioso. (informal)", verbo: "-な", forma: "f. corta (afirmativo pasado)", audio: "audios/398.mp3"},
+{jp:"にぎやかじゃない。", es:"No es animado/bullicioso. (informal)", verbo: "-な", forma: "f. corta (negativo presente)", audio: "audios/399.mp3"},
+{jp:"にぎやかじゃなかった。", es:"No era animado/bullicioso. (informal)", verbo: "-な", forma: "f. corta (negativo pasado)", audio: "audios/400.mp3"},
+{jp:"弱いです。", es:"Es débil.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/401.mp3"},
+{jp:"弱かったです。", es:"Era débil.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/402.mp3"},
+{jp:"弱くないです。", es:"No es débil.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/403.mp3"},
+{jp:"弱くなかったです。", es:"No era débil.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/404.mp3"},
+{jp:"弱い。", es:"Es débil. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/405.mp3"},
+{jp:"弱かった。", es:"Era débil. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/406.mp3"},
+{jp:"弱くない。", es:"No es débil. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/407.mp3"},
+{jp:"弱くなかった。", es:"No era débil. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/408.mp3"},
+{jp:"短いです。", es:"Es corto/breve.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/409.mp3"},
+{jp:"短かったです。", es:"Era corto/breve.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/410.mp3"},
+{jp:"短くないです。", es:"No es corto/breve.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/411.mp3"},
+{jp:"短くなかったです。", es:"No era corto/breve.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/412.mp3"},
+{jp:"短い。", es:"Es corto/breve. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/413.mp3"},
+{jp:"短かった。", es:"Era corto/breve. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/414.mp3"},
+{jp:"短くない。", es:"No es corto/breve. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/415.mp3"},
+{jp:"短くなかった。", es:"No era corto/breve. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/416.mp3"},
+{jp:"古いです。", es:"Es viejo/antiguo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/417.mp3"},
+{jp:"古かったです。", es:"Era viejo/antiguo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/418.mp3"},
+{jp:"古くないです。", es:"No es viejo/antiguo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/419.mp3"},
+{jp:"古くなかったです。", es:"No era viejo/antiguo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/420.mp3"},
+{jp:"古い。", es:"Es viejo/antiguo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/421.mp3"},
+{jp:"古かった。", es:"Era viejo/antiguo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/422.mp3"},
+{jp:"古くない。", es:"No es viejo/antiguo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/423.mp3"},
+{jp:"古くなかった。", es:"No era viejo/antiguo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/424.mp3"},
+{jp:"円いです。", es:"Es redondo/circular.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/425.mp3"},
+{jp:"円かったです。", es:"Era  redondo/circular.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/426.mp3"},
+{jp:"円くないです。", es:"No es redondo/circular.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/427.mp3"},
+{jp:"円くなかったです。", es:"No era redondo/circular.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/428.mp3"},
+{jp:"円い。", es:"Es redondo/circular. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/429.mp3"},
+{jp:"円かった。", es:"Era  redondo/circular. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/430.mp3"},
+{jp:"円くない。", es:"No es redondo/circular. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/431.mp3"},
+{jp:"円くなかった。", es:"No era redondo/circular. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/432.mp3"},
+{jp:"丸いです。", es:"Es redondo/esférico.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/433.mp3"},
+{jp:"丸かったです。", es:"Era redondo/esférico.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/434.mp3"},
+{jp:"丸くないです。", es:"No es redondo/esférico.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/435.mp3"},
+{jp:"丸くなかったです。", es:"No era redondo/esférico.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/436.mp3"},
+{jp:"丸い。", es:"Es redondo/esférico. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/437.mp3"},
+{jp:"丸かった。", es:"Era redondo/esférico. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/438.mp3"},
+{jp:"丸くない。", es:"No es redondo/esférico. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/439.mp3"},
+{jp:"丸くなかった。", es:"No era redondo/esférico. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/440.mp3"},
+{jp:"楽しいです。", es:"Es divertido.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/441.mp3"},
+{jp:"楽しかったです。", es:"Era divertido.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/442.mp3"},
+{jp:"楽しくないです。", es:"No es divertido.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/443.mp3"},
+{jp:"楽しくなかったです。", es:"No era divertido.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/444.mp3"},
+{jp:"楽しい。", es:"Es divertido. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/445.mp3"},
+{jp:"楽しかった。", es:"Era divertido. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/446.mp3"},
+{jp:"楽しくない。", es:"No es divertido. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/447.mp3"},
+{jp:"楽しくなかった。", es:"No era divertido. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/448.mp3"},
+{jp:"太いです。", es:"Es gordo/grueso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/449.mp3"},
+{jp:"太かったです。", es:"Era gordo/grueso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/450.mp3"},
+{jp:"太くないです。", es:"No es gordo/grueso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/451.mp3"},
+{jp:"太くなかったです。", es:"No era gordo/grueso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/452.mp3"},
+{jp:"太い。", es:"Es gordo/grueso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/453.mp3"},
+{jp:"太かった。", es:"Era gordo/grueso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/454.mp3"},
+{jp:"太くない。", es:"No es gordo/grueso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/455.mp3"},
+{jp:"太くなかった。", es:"No era gordo/grueso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/456.mp3"},
+{jp:"苦いです。", es:"Es amargo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/457.mp3"},
+{jp:"苦かったです。", es:"Era amargo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/458.mp3"},
+{jp:"苦くないです。", es:"No es amargo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/459.mp3"},
+{jp:"苦くなかったです。", es:"No era amargo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/460.mp3"},
+{jp:"苦い。", es:"Es amargo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/461.mp3"},
+{jp:"苦かった。", es:"Era amargo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/462.mp3"},
+{jp:"苦くない。", es:"No es amargo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/463.mp3"},
+{jp:"苦くなかった。", es:"No era amargo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/464.mp3"},
+{jp:"甘いです。", es:"Es dulce.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/465.mp3"},
+{jp:"甘かったです。", es:"Era dulce.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/466.mp3"},
+{jp:"甘くないです。", es:"No es dulce.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/467.mp3"},
+{jp:"甘くなかったです。", es:"No era dulce.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/468.mp3"},
+{jp:"甘い。", es:"Es dulce. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/469.mp3"},
+{jp:"甘かった。", es:"Era dulce. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/470.mp3"},
+{jp:"甘くない。", es:"No es dulce. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/471.mp3"},
+{jp:"甘くなかった。", es:"No era dulce. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/472.mp3"},
+{jp:"厚いです。", es:"Es grueso/profundo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/473.mp3"},
+{jp:"厚かったです。", es:"Era grueso/profundo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/474.mp3"},
+{jp:"厚くないです。", es:"No es grueso/profundo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/475.mp3"},
+{jp:"厚くなかったです。", es:"No era grueso/profundo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/476.mp3"},
+{jp:"厚い。", es:"Es grueso/profundo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/477.mp3"},
+{jp:"厚かった。", es:"Era grueso/profundo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/478.mp3"},
+{jp:"厚くない。", es:"No es grueso/profundo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/479.mp3"},
+{jp:"厚くなかった。", es:"No era grueso/profundo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/480.mp3"},
+{jp:"難しいです。", es:"Es difícil.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/481.mp3"},
+{jp:"難しかったです。", es:"Era difícil.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/482.mp3"},
+{jp:"難しくないです。", es:"No es difícil.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/483.mp3"},
+{jp:"難しくなかったです。", es:"No era difícil.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/484.mp3"},
+{jp:"難しい。", es:"Es difícil. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/485.mp3"},
+{jp:"難しかった。", es:"Era difícil. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/486.mp3"},
+{jp:"難しくない。", es:"No es difícil. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/487.mp3"},
+{jp:"難しくなかった。", es:"No era difícil. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/488.mp3"},
+{jp:"かわいいです。", es:"Es lindo.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/489.mp3"},
+{jp:"かわいかったです。", es:"Era lindo.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/490.mp3"},
+{jp:"かわいくないです。", es:"No es lindo.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/491.mp3"},
+{jp:"かわいくなかったです。", es:"No era lindo.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/492.mp3"},
+{jp:"かわいい。", es:"Es lindo. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/493.mp3"},
+{jp:"かわいかった。", es:"Era lindo. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/494.mp3"},
+{jp:"かわいくない。", es:"No es lindo. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/495.mp3"},
+{jp:"かわいくなかった。", es:"No era lindo. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/496.mp3"},
+{jp:"近いです。", es:"Está cerca.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/497.mp3"},
+{jp:"近かったです。", es:"Estaba cerca.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/498.mp3"},
+{jp:"近くないです。", es:"No está cerca.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/499.mp3"},
+{jp:"近くなかったです。", es:"No estaba cerca.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/500.mp3"},
+{jp:"近い。", es:"Está cerca. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/501.mp3"},
+{jp:"近かった。", es:"Estaba cerca. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/502.mp3"},
+{jp:"近くない。", es:"No está cerca. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/503.mp3"},
+{jp:"近くなかった。", es:"No estaba cerca. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/504.mp3"},
+{jp:"多いです。", es:"Hay muchos/es numeroso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/505.mp3"},
+{jp:"多かったです。", es:"Había muchos/era numeroso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/506.mp3"},
+{jp:"多くないです。", es:"No hay muchos/es numeroso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/507.mp3"},
+{jp:"多くなかったです。", es:"No había muchos/era numeroso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/508.mp3"},
+{jp:"多い。", es:"Hay muchos/es numeroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/509.mp3"},
+{jp:"多かった。", es:"Había muchos/era numeroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/510.mp3"},
+{jp:"多くない。", es:"No hay muchos/es numeroso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/511.mp3"},
+{jp:"多くなかった。", es:"No había muchos/era numeroso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/512.mp3"},
+{jp:"汚いです。", es:"Está sucio/manchado.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/513.mp3"},
+{jp:"汚かったです。", es:"Estaba sucio/manchado.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/514.mp3"},
+{jp:"汚くないです。", es:"No está sucio/manchado.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/515.mp3"},
+{jp:"汚くなかったです。", es:"No estaba sucio/manchado.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/516.mp3"},
+{jp:"汚い。", es:"Está sucio/manchado. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/517.mp3"},
+{jp:"汚かった。", es:"Estaba sucio/manchado. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/518.mp3"},
+{jp:"汚くない。", es:"No está sucio/manchado. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/519.mp3"},
+{jp:"汚くなかった。", es:"No estaba sucio/manchado. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/520.mp3"},
+{jp:"辛いです。", es:"Es picante.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/521.mp3"},
+{jp:"辛かったです。", es:"Era picante.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/522.mp3"},
+{jp:"辛くないです。", es:"No es picante.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/523.mp3"},
+{jp:"辛くなかったです。", es:"No era picante.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/524.mp3"},
+{jp:"辛い。", es:"Es picante. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/525.mp3"},
+{jp:"辛かった。", es:"Era picante. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/526.mp3"},
+{jp:"辛くない。", es:"No es picante. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/527.mp3"},
+{jp:"辛くなかった。", es:"No era picante. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/528.mp3"},
+{jp:"少ないです。", es:"Es escaso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/529.mp3"},
+{jp:"少なかったです。", es:"Era escaso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/530.mp3"},
+{jp:"少なくないです。", es:"No es escaso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/531.mp3"},
+{jp:"少なくなかったです。", es:"No era escaso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/532.mp3"},
+{jp:"少ない。", es:"Es escaso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/533.mp3"},
+{jp:"少なかった。", es:"Era escaso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/534.mp3"},
+{jp:"少なくない。", es:"No es escaso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/535.mp3"},
+{jp:"少なくなかった。", es:"No era escaso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/536.mp3"},
+{jp:"若いです。", es:"Es joven.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/537.mp3"},
+{jp:"若かったです。", es:"Era joven.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/538.mp3"},
+{jp:"若くないです。", es:"No es joven.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/539.mp3"},
+{jp:"若くなかったです。", es:"No era joven.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/540.mp3"},
+{jp:"若い。", es:"Es joven. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/541.mp3"},
+{jp:"若かった。", es:"Era joven. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/542.mp3"},
+{jp:"若くない。", es:"No es joven. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/543.mp3"},
+{jp:"若くなかった。", es:"No era joven. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/544.mp3"},
+{jp:"重いです。", es:"Es pesado.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/545.mp3"},
+{jp:"重かったです。", es:"Era pesado.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/546.mp3"},
+{jp:"重くないです。", es:"No es pesado.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/547.mp3"},
+{jp:"重くなかったです。", es:"No era pesado.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/548.mp3"},
+{jp:"重い。", es:"Es pesado. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/549.mp3"},
+{jp:"重かった。", es:"Era pesado. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/550.mp3"},
+{jp:"重くない。", es:"No es pesado. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/551.mp3"},
+{jp:"重くなかった。", es:"No era pesado. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/552.mp3"},
+{jp:"細いです。", es:"Es fino/delgado.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/553.mp3"},
+{jp:"細かったです。", es:"Era fino/delgado.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/554.mp3"},
+{jp:"細くないです。", es:"No es fino/delgado.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/555.mp3"},
+{jp:"細くなかったです。", es:"No era fino/delgado.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/556.mp3"},
+{jp:"細い。", es:"Es fino/delgado. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/557.mp3"},
+{jp:"細かった。", es:"Era fino/delgado. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/558.mp3"},
+{jp:"細くない。", es:"No es fino/delgado. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/559.mp3"},
+{jp:"細くなかった。", es:"No era fino/delgado. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/560.mp3"},
+{jp:"遅いです。", es:"Es lento/tarde.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/561.mp3"},
+{jp:"遅かったです。", es:"Era lento/tarde.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/562.mp3"},
+{jp:"遅くないです。", es:"No es lento/tarde.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/563.mp3"},
+{jp:"遅くなかったです。", es:"No era lento/tarde.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/564.mp3"},
+{jp:"遅い。", es:"Es lento/tarde. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/565.mp3"},
+{jp:"遅かった。", es:"Era lento/tarde. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/566.mp3"},
+{jp:"遅くない。", es:"No es lento/tarde. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/567.mp3"},
+{jp:"遅くなかった。", es:"No era lento/tarde. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/568.mp3"},
+{jp:"欲しいです。", es:"Lo quiero.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/569.mp3"},
+{jp:"欲しかったです。", es:"Lo quería.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/570.mp3"},
+{jp:"欲しくないです。", es:"No lo quiero.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/571.mp3"},
+{jp:"欲しくなかったです。", es:"No lo quería.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/572.mp3"},
+{jp:"欲しい。", es:"Lo quiero. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/573.mp3"},
+{jp:"欲しかった。", es:"Lo quería. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/574.mp3"},
+{jp:"欲しくない。", es:"No lo quiero. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/575.mp3"},
+{jp:"欲しくなかった。", es:"No lo quería. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/576.mp3"},
+{jp:"温いです。", es:"Está tibio/templado.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/577.mp3"},
+{jp:"温かったです。", es:"Estaba tibio/templado.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/578.mp3"},
+{jp:"温くないです。", es:"No está tibio/templado.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/579.mp3"},
+{jp:"温くなかったです。", es:"No estaba tibio/templado.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/580.mp3"},
+{jp:"温い。", es:"Está tibio/templado. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/581.mp3"},
+{jp:"温かった。", es:"Estaba tibio/templado. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/582.mp3"},
+{jp:"温くない。", es:"No está tibio/templado. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/583.mp3"},
+{jp:"温くなかった。", es:"No estaba tibio/templado. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/584.mp3"},
+{jp:"痛いです。", es:"Es doloroso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/585.mp3"},
+{jp:"痛かったです。", es:"Era doloroso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/586.mp3"},
+{jp:"痛くないです。", es:"No es doloroso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/587.mp3"},
+{jp:"痛くなかったです。", es:"No era doloroso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/588.mp3"},
+{jp:"痛い。", es:"Es doloroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/589.mp3"},
+{jp:"痛かった。", es:"Era doloroso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/590.mp3"},
+{jp:"痛くない。", es:"No es doloroso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/591.mp3"},
+{jp:"痛くなかった。", es:"No era doloroso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/592.mp3"},
+{jp:"軽いです。", es:"Es ligero.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/593.mp3"},
+{jp:"軽かったです。", es:"Era ligero.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/594.mp3"},
+{jp:"軽くないです。", es:"No es ligero.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/595.mp3"},
+{jp:"軽くなかったです。", es:"No era ligero.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/596.mp3"},
+{jp:"軽い。", es:"Es ligero. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/597.mp3"},
+{jp:"軽かった。", es:"Era ligero. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/598.mp3"},
+{jp:"軽くない。", es:"No es ligero. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/599.mp3"},
+{jp:"軽くなかった。", es:"No era ligero. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/600.mp3"},
+{jp:"おいしいです。", es:"Está delicioso.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/601.mp3"},
+{jp:"おいしかったです。", es:"Estaba delicioso.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/602.mp3"},
+{jp:"おいしくないです。", es:"No está delicioso.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/603.mp3"},
+{jp:"おいしくなかったです。", es:"No estaba delicioso.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/604.mp3"},
+{jp:"おいしい。", es:"Está delicioso. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/605.mp3"},
+{jp:"おいしかった。", es:"Estaba delicioso. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/606.mp3"},
+{jp:"おいしくない。", es:"No está delicioso. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/607.mp3"},
+{jp:"おいしくなかった。", es:"No estaba delicioso. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/608.mp3"},
+{jp:"暖かいです。", es:"Está caliente.", verbo: "-い", forma: "f. larga (afirmativo presente)", audio: "audios/609.mp3"},
+{jp:"暖かかったです。", es:"Estaba caliente.", verbo: "-い", forma: "f. larga (afirmativo pasado)", audio: "audios/610.mp3"},
+{jp:"暖かくないです。", es:"No está caliente.", verbo: "-い", forma: "f. larga (negativo presente)", audio: "audios/611.mp3"},
+{jp:"暖かくなかったです。", es:"No estaba caliente.", verbo: "-い", forma: "f. larga (negativo pasado)", audio: "audios/612.mp3"},
+{jp:"暖かい。", es:"Está caliente. (informal)", verbo: "-い", forma: "f. corta (afirmativo presente)", audio: "audios/613.mp3"},
+{jp:"暖かかった。", es:"Estaba caliente. (informal)", verbo: "-い", forma: "f. corta (afirmativo pasado)", audio: "audios/614.mp3"},
+{jp:"暖かくない。", es:"No está caliente. (informal)", verbo: "-い", forma: "f. corta (negativo presente)", audio: "audios/615.mp3"},
+{jp:"暖かくなかった。", es:"No estaba caliente. (informal)", verbo: "-い", forma: "f. corta (negativo pasado)", audio: "audios/616.mp3"},
+    ];
+
+    // A partir de la lista de frases extraemos los verbos y las formas únicas
+    const verbs = Array.from(new Set(frases.map((f) => f.verbo)));
+    const forms = Array.from(new Set(frases.map((f) => f.forma)));
+
+    // Sets con la selección actual (pantalla inicial)
+    const selectedVerbs = new Set();
+    const selectedForms = new Set();
+
+    // ==========
+    // Referencias DOM - pantalla inicial
+    // ==========
+
+    const setupScreen = document.getElementById("setup-screen");
+    const studyScreen = document.getElementById("study-screen");
+
+    const verbsGrid = document.getElementById("verbs-grid");
+    const formsGrid = document.getElementById("forms-grid");
+    const btnSelectAllVerbs = document.getElementById("btn-select-all-verbs");
+    const btnSelectAllForms = document.getElementById("btn-select-all-forms");
+    const verbsCountEl = document.getElementById("verbs-count");
+    const formsCountEl = document.getElementById("forms-count");
+
+    const modeEscuchar = document.getElementById("mode-escuchar");
+    const modeTraducir = document.getElementById("mode-traducir");
+    const modeLeer = document.getElementById("mode-leer");
+    const statusText = document.getElementById("status-text");
+    const statusCounter = document.getElementById("status-counter");
+    const toast = document.getElementById("toast");
+
+    // ==========
+    // Referencias DOM - pantalla de estudio
+    // ==========
+
+    const btnHome = document.getElementById("btn-home");
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
+
+    const studyMain = document.getElementById("study-main");
+    const studySub = document.getElementById("study-sub");
+    const btnRepeatAudio = document.getElementById("btn-repeat-audio");
+
+    const btnReveal = document.getElementById("btn-reveal");
+    const resultButtons = document.getElementById("result-buttons");
+    const btnCorrect = document.getElementById("btn-correct");
+    const btnWrong = document.getElementById("btn-wrong");
+    const btnFinishHome = document.getElementById("btn-finish-home");
+
+    const audioPlayer = document.getElementById("audio-player");
+
+    // ==========
+    // Estado de la sesión de estudio
+    // ==========
+
+    let studyMode = null; // "escuchar" | "traducir" | "leer"
+    let remainingPhrases = [];
+    let totalPhrases = 0;
+    let currentIndex = -1;
+    let currentPhrase = null;
+    let isRevealed = false;
+
+    // ==========
+    // Funciones auxiliares de UI (pantalla inicial)
+    // ==========
+
+    function createToggleButton(label, value, type) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = label;
+      btn.className = "toggle-btn";
+      btn.dataset.value = value;
+      btn.dataset.type = type; // "verb" o "form"
+      btn.addEventListener("click", () => {
+        handleToggleClick(btn);
+      });
+      return btn;
+    }
+
+    function renderGrids() {
+      // Verbos
+      verbsGrid.innerHTML = "";
+      verbs.forEach((verb) => {
+        const btn = createToggleButton(verb, verb, "verb");
+        verbsGrid.appendChild(btn);
+      });
+
+      // Formas
+      formsGrid.innerHTML = "";
+      forms.forEach((form) => {
+        const label = "" + form;
+        const btn = createToggleButton(label, form, "form");
+        formsGrid.appendChild(btn);
+      });
+
+      updateCounts();
+      updateSelectAllStates();
+      updateModesState();
+    }
+
+    function handleToggleClick(btn) {
+      const value = btn.dataset.value;
+      const type = btn.dataset.type;
+
+      if (type === "verb") {
+        if (selectedVerbs.has(value)) {
+          selectedVerbs.delete(value);
+          btn.classList.remove("is-active");
+        } else {
+          selectedVerbs.add(value);
+          btn.classList.add("is-active");
+        }
+      } else if (type === "form") {
+        if (selectedForms.has(value)) {
+          selectedForms.delete(value);
+          btn.classList.remove("is-active");
+        } else {
+          selectedForms.add(value);
+          btn.classList.add("is-active");
+        }
+      }
+
+      updateCounts();
+      updateSelectAllStates();
+      updateModesState();
+    }
+
+    function updateCounts() {
+      verbsCountEl.textContent = selectedVerbs.size;
+      formsCountEl.textContent = selectedForms.size;
+
+      const totalSelectedPhrases = getActivePhrases().length;
+      if (totalSelectedPhrases > 0) {
+        statusCounter.textContent = `${totalSelectedPhrases} frases seleccionadas`;
+      } else {
+        statusCounter.textContent = "";
+      }
+    }
+
+    function updateSelectAllStates() {
+      // Verbos
+      const allVerbsSelected = selectedVerbs.size === verbs.length && verbs.length > 0;
+      if (allVerbsSelected) {
+        btnSelectAllVerbs.classList.add("is-active");
+      } else {
+        btnSelectAllVerbs.classList.remove("is-active");
+      }
+
+      // Formas
+      const allFormsSelected = selectedForms.size === forms.length && forms.length > 0;
+      if (allFormsSelected) {
+        btnSelectAllForms.classList.add("is-active");
+      } else {
+        btnSelectAllForms.classList.remove("is-active");
+      }
+    }
+
+    function updateModesState() {
+      const hasVerb = selectedVerbs.size > 0;
+      const hasForm = selectedForms.size > 0;
+      const canStudy = hasVerb && hasForm;
+
+      const modeButtons = [modeEscuchar, modeTraducir, modeLeer];
+
+      modeButtons.forEach((btn) => {
+        if (canStudy) {
+          btn.classList.remove("is-disabled");
+          btn.removeAttribute("disabled");
+        } else {
+          btn.classList.add("is-disabled");
+          btn.setAttribute("disabled", "disabled");
+        }
+      });
+
+      if (!canStudy) {
+        statusText.textContent = "Selecciona al menos 1 tipo de adjetivo y 1 forma.";
+        toast.textContent = "";
+      } else {
+        statusText.textContent =
+          "Listo. Elige un modo para empezar (escuchar, traducir o leer).";
+      }
+    }
+
+    function getActivePhrases() {
+      if (selectedVerbs.size === 0 || selectedForms.size === 0) return [];
+      return frases.filter(
+        (f) => selectedVerbs.has(f.verbo) && selectedForms.has(f.forma)
+      );
+    }
+
+    // ==========
+    // Botones "Seleccionar todos"
+    // ==========
+
+    btnSelectAllVerbs.addEventListener("click", () => {
+      const allSelected = selectedVerbs.size === verbs.length && verbs.length > 0;
+      selectedVerbs.clear();
+      if (!allSelected) {
+        verbs.forEach((v) => selectedVerbs.add(v));
+      }
+      Array.from(verbsGrid.children).forEach((btn) => {
+        const value = btn.dataset.value;
+        if (selectedVerbs.has(value)) {
+          btn.classList.add("is-active");
+        } else {
+          btn.classList.remove("is-active");
+        }
+      });
+      updateCounts();
+      updateSelectAllStates();
+      updateModesState();
+    });
+
+    btnSelectAllForms.addEventListener("click", () => {
+      const allSelected = selectedForms.size === forms.length && forms.length > 0;
+      selectedForms.clear();
+      if (!allSelected) {
+        forms.forEach((f) => selectedForms.add(f));
+      }
+      Array.from(formsGrid.children).forEach((btn) => {
+        const value = btn.dataset.value;
+        if (selectedForms.has(value)) {
+          btn.classList.add("is-active");
+        } else {
+          btn.classList.remove("is-active");
+        }
+      });
+      updateCounts();
+      updateSelectAllStates();
+      updateModesState();
+    });
+
+    // ==========
+    // Lógica de estudio (flashcards)
+    // ==========
+
+    function showSetupScreen() {
+      studyScreen.style.display = "none";
+      setupScreen.style.display = "flex";
+      // Parar audio si estuviera sonando
+      try {
+        audioPlayer.pause();
+      } catch (e) {}
+    }
+
+    function showStudyScreen() {
+      setupScreen.style.display = "none";
+      studyScreen.style.display = "flex";
+    }
+
+    function playAudioForCurrent() {
+      if (!currentPhrase || !currentPhrase.audio) return;
+      try {
+        audioPlayer.pause();
+      } catch (e) {}
+      audioPlayer.src = currentPhrase.audio;
+      audioPlayer.currentTime = 0;
+      audioPlayer.play().catch((err) => {
+        console.warn("No se pudo reproducir el audio:", err);
+      });
+    }
+
+    function updateProgress() {
+      const completed = totalPhrases - remainingPhrases.length;
+      const ratio = totalPhrases > 0 ? completed / totalPhrases : 0;
+      progressBar.style.width = (ratio * 100).toFixed(1) + "%";
+      progressText.textContent = `${completed} / ${totalPhrases}`;
+    }
+
+    function setBottomState(state) {
+      // "question" | "revealed" | "finished"
+      if (state === "question") {
+        btnReveal.style.display = "block";
+        resultButtons.style.display = "none";
+        btnFinishHome.style.display = "none";
+      } else if (state === "revealed") {
+        btnReveal.style.display = "none";
+        resultButtons.style.display = "flex";
+        btnFinishHome.style.display = "none";
+      } else if (state === "finished") {
+        btnReveal.style.display = "none";
+        resultButtons.style.display = "none";
+        btnFinishHome.style.display = "block";
+      }
+    }
+
+    function renderCardQuestion() {
+      if (!currentPhrase) return;
+
+      btnRepeatAudio.style.display = "none";
+
+      if (studyMode === "escuchar") {
+        studyMain.textContent = "Reproduciendo audio";
+        studySub.textContent = "";
+        btnRepeatAudio.style.display = "inline-flex";
+        // reproducción inicial
+        playAudioForCurrent();
+      } else if (studyMode === "traducir") {
+        studyMain.textContent = currentPhrase.es;
+        studySub.textContent = "";
+      } else if (studyMode === "leer") {
+        studyMain.textContent = currentPhrase.jp;
+        studySub.textContent = "";
+      }
+    }
+
+	function renderCardRevealed() {
+	  if (!currentPhrase) return;
+	  studyMain.textContent = currentPhrase.jp;
+	  studySub.textContent = currentPhrase.es;
+	  btnRepeatAudio.style.display = "inline-flex";
+
+	  // En modo ESCUCHAR no reproducimos automáticamente el audio al revelar
+	  if (studyMode !== "escuchar") {
+	    playAudioForCurrent();
+	  }
+	}
+    
+
+    function pickNextPhrase() {
+      if (remainingPhrases.length === 0) {
+        showFinishedState();
+        return;
+      }
+      const randomIndex = Math.floor(Math.random() * remainingPhrases.length);
+      currentIndex = randomIndex;
+      currentPhrase = remainingPhrases[randomIndex];
+      isRevealed = false;
+      setBottomState("question");
+      updateProgress();
+      renderCardQuestion();
+    }
+
+    function showFinishedState() {
+      currentPhrase = null;
+      isRevealed = true;
+      updateProgress();
+      studyMain.textContent = "Lista de estudio terminada.";
+      studyMain.classList.add("finished-text-main");
+      studySub.textContent =
+        "Puedes volver al inicio o cambiar la selección en la pantalla principal.";
+      btnRepeatAudio.style.display = "none";
+      setBottomState("finished");
+    }
+
+    function initStudySession(mode) {
+      studyMode = mode;
+      remainingPhrases = getActivePhrases().slice();
+      totalPhrases = remainingPhrases.length;
+
+      if (totalPhrases === 0) {
+        toast.textContent =
+          "No hay frases para esa combinación de tipo de adjetivo y formas (revisa la selección).";
+        toast.style.color = "var(--danger)";
+        return false;
+      }
+
+      toast.textContent = "";
+      studyMain.classList.remove("finished-text-main");
+
+      showStudyScreen();
+      pickNextPhrase();
+      return true;
+    }
+
+    function startStudy(mode) {
+      const ok = initStudySession(mode);
+      if (!ok) return;
+    }
+
+    function markAnswer(isCorrect) {
+      if (!currentPhrase) return;
+
+      if (isCorrect) {
+        // eliminamos la frase acertada de la lista
+        remainingPhrases.splice(currentIndex, 1);
+      }
+
+      if (remainingPhrases.length === 0) {
+        showFinishedState();
+      } else {
+        pickNextPhrase();
+      }
+    }
+
+    // ==========
+    // Eventos - modos de estudio
+    // ==========
+
+    modeEscuchar.addEventListener("click", () => startStudy("escuchar"));
+    modeTraducir.addEventListener("click", () => startStudy("traducir"));
+    modeLeer.addEventListener("click", () => startStudy("leer"));
+
+    // ==========
+    // Eventos - pantalla de estudio
+    // ==========
+
+    btnHome.addEventListener("click", () => {
+      showSetupScreen();
+    });
+
+    btnFinishHome.addEventListener("click", () => {
+      showSetupScreen();
+    });
+
+    btnRepeatAudio.addEventListener("click", () => {
+      playAudioForCurrent();
+    });
+
+    btnReveal.addEventListener("click", () => {
+      if (!currentPhrase) return;
+      isRevealed = true;
+      setBottomState("revealed");
+      renderCardRevealed();
+    });
+
+    btnCorrect.addEventListener("click", () => {
+      markAnswer(true);
+    });
+
+    btnWrong.addEventListener("click", () => {
+      markAnswer(false);
+    });
+	
+	// ---------- Atajos de teclado (solo en pantalla de estudio) ----------
+
+	document.addEventListener("keydown", (e) => {
+	  // Solo si estamos en la pantalla de estudio
+	  if (studyScreen.style.display === "none") return;
+
+	  // Evitar repetición al dejar pulsada una tecla
+	  if (e.repeat) return;
+
+	  // Barra espaciadora
+	  if (e.key === " " || e.code === "Space") {
+	    e.preventDefault(); // evita que haga scroll
+
+	    // Si no hay frase actual, no hacemos nada
+	    if (!currentPhrase) return;
+
+	    if (!isRevealed) {
+	      // Aún no revelada → hace clic en "Revelar"
+	      btnReveal.click();
+	    } else {
+	      // Ya revelada → hace clic en "He acertado"
+	      btnCorrect.click();
+	    }
+	  }
+
+	  // Tecla "m" o "M" → "No la sabía" (solo si está revelada)
+	  if (e.key === "m" || e.key === "M") {
+	    if (!currentPhrase) return;
+	    if (!isRevealed) return;
+	    btnWrong.click();
+	  }
+	});
+	
+
+    // ==========
+    // Inicializar
+    // ==========
+    renderGrids();
+  </script>
+</body>
+</html>
